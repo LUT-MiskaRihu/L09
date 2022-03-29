@@ -10,6 +10,10 @@
         android:id="@+id/llvMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Päivämäärä" />
+                    android:text="Päivämäärä"
+                    tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -72,6 +77,7 @@
 
                         <EditText
                             android:id="@+id/etDate"
+                            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -96,7 +102,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Alkamiskaika" />
+                    android:text="Alkamiskaika"
+                    tools:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -104,29 +111,38 @@
                     android:layout_weight="1"
                     android:gravity="center">
 
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
                     <LinearLayout
                         android:id="@+id/llStartTimeBegin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView4"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center|center_vertical"
-                            android:text="Aikaisintaan" />
+                            android:text="Alkaa aikaisintaan" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <Spinner
-                                android:id="@+id/spinTimeStartHour"
-                                android:layout_width="match_parent"
+                            <EditText
+                                android:id="@+id/etTimeStartHour"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:spinnerMode="dialog" />
+                                android:layout_weight="1"
+                                android:ems="2"
+                                android:inputType="number" />
 
                             <TextView
                                 android:id="@+id/textView7"
@@ -135,39 +151,48 @@
                                 android:layout_weight="1"
                                 android:text=":" />
 
-                            <Spinner
-                                android:id="@+id/spinTimeStartMinute"
-                                android:layout_width="match_parent"
+                            <EditText
+                                android:id="@+id/etTimeStartMinute"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:spinnerMode="dialog" />
+                                android:layout_weight="1"
+                                android:ems="2"
+                                android:inputType="number" />
                         </LinearLayout>
 
                     </LinearLayout>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <LinearLayout
                         android:id="@+id/llStartTimeEnd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView5"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Viimeistään" />
+                            android:text="Alkaa viimeistään" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <Spinner
-                                android:id="@+id/spinTimeEndHour"
-                                android:layout_width="match_parent"
+                            <EditText
+                                android:id="@+id/etTimeEndHour"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:spinnerMode="dialog" />
+                                android:ems="2"
+                                android:inputType="number" />
 
                             <TextView
                                 android:id="@+id/textView8"
@@ -176,15 +201,21 @@
                                 android:layout_weight="1"
                                 android:text=":" />
 
-                            <Spinner
-                                android:id="@+id/spinTimeEndMinute"
-                                android:layout_width="match_parent"
+                            <EditText
+                                android:id="@+id/etTimeEndMinute"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:spinnerMode="dialog" />
+                                android:ems="2"
+                                android:inputType="number" />
                         </LinearLayout>
 
                     </LinearLayout>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -216,6 +247,7 @@
                 android:id="@+id/btnDoSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="readXML"
                 android:text="Hae" />
 
         </LinearLayout>
@@ -241,6 +273,7 @@
 
             <ListView
                 android:id="@+id/lvResults"
+                style="@style/Widget.AppCompat.ListView.Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
