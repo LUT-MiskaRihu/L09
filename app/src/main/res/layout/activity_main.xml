@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/llvMain"
+        android:id="@+id/llMain"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -21,29 +21,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/llvSearch"
+            android:id="@+id/llSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llhTheater"
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/twTheaterName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|center_vertical"
-                    android:text="Valitse elokuvateatteri" />
-
-                <Spinner
-                    android:id="@+id/spinTheaters"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                android:gravity="center"
+                android:text="Hakukriteerit" />
 
             <View
                 android:id="@+id/divider5"
@@ -52,41 +40,59 @@
                 android:background="?android:attr/listDivider" />
 
             <LinearLayout
-                android:id="@+id/llvDate"
+                android:id="@+id/llTheatre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/twTheaterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center|center_vertical"
+                    android:text="Valitse teatteri: " />
+
+                <Spinner
+                    android:id="@+id/spinTheatres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llMovieName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Elokuvan nimi"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView2"
+                <EditText
+                    android:id="@+id/etDate"
+                    style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
                     android:gravity="center"
-                    android:text="Päivämäärä"
-                    tools:visibility="gone" />
+                    android:hint="Päivämäärä pp.kk.vvvv"
+                    android:inputType="date" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent">
-
-                        <EditText
-                            android:id="@+id/etDate"
-                            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:gravity="center"
-                            android:hint="pp.kk.vvvv"
-                            android:inputType="date" />
-
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 
@@ -95,15 +101,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Alkamiskaika"
-                    tools:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,7 +114,7 @@
                         android:layout_weight="1" />
 
                     <LinearLayout
-                        android:id="@+id/llStartTimeBegin"
+                        android:id="@+id/llStartTimeMin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -130,35 +127,16 @@
                             android:gravity="center|center_vertical"
                             android:text="Alkaa aikaisintaan" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/etTimeMin"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="5"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/etTimeStartHour"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:inputType="number" />
-
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text=":" />
-
-                            <EditText
-                                android:id="@+id/etTimeStartMinute"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:inputType="number" />
-                        </LinearLayout>
+                            android:hint="hh:mm"
+                            android:inputType="time"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
@@ -168,7 +146,7 @@
                         android:layout_weight="1" />
 
                     <LinearLayout
-                        android:id="@+id/llStartTimeEnd"
+                        android:id="@+id/llStartTimeMax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -181,34 +159,16 @@
                             android:gravity="center"
                             android:text="Alkaa viimeistään" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/etTimeMax"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/etTimeEndHour"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:inputType="number" />
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text=":" />
-
-                            <EditText
-                                android:id="@+id/etTimeEndMinute"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:inputType="number" />
-                        </LinearLayout>
+                            android:layout_weight="1"
+                            android:ems="5"
+                            android:gravity="center"
+                            android:hint="hh:mm"
+                            android:inputType="time"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
@@ -221,30 +181,8 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
-            <LinearLayout
-                android:id="@+id/llMovieName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="Elokuvan nimi"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
-
             <Button
-                android:id="@+id/btnDoSearch"
+                android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="readXML"
@@ -252,14 +190,8 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
         <LinearLayout
-            android:id="@+id/llvResults"
+            android:id="@+id/llResults"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -270,6 +202,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Hakutulokset" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <ListView
                 android:id="@+id/lvResults"

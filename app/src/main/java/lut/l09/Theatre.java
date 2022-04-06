@@ -3,12 +3,25 @@ package lut.l09;
 import java.util.ArrayList;
 
 public class Theatre {
-    private int iID = 0;
-    private String sName = "AreaName";
-    private ArrayList<Movie> arrMovies = new ArrayList<Movie>();
+    private int iID;
+    private String sName;
+    private ArrayList<Show> arrShows = new ArrayList<Show>();
+
+    public Theatre() {
+        this.iID = 0;
+        this.sName = "Name";
+    }
 
     public Theatre(int iID, String sName) {
         this.iID = iID;
+        this.sName = sName;
+    }
+
+    public void setID(int iID) {
+        this.iID = iID;
+    }
+
+    public void setName(String sName) {
         this.sName = sName;
     }
 
@@ -16,19 +29,15 @@ public class Theatre {
         return iID;
     }
 
-    public void setID(int iID) {
-        this.iID = iID;
-    }
-
     public String getName() {
         return sName;
     }
 
-    public void setName(String sName) {
-        this.sName = sName;
+    public void addMovie(Show show) {
+        arrShows.add(show);
     }
 
-    public ArrayList<Movie> getArrMovies() {
-        return arrMovies;
+    public ArrayList<Show> getMovies() {
+        return arrShows;
     }
 }
