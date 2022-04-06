@@ -31,51 +31,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Hakukriteerit"
-                tools:visibility="visible" />
+                android:text="Hakukriteerit" />
 
             <View
                 android:id="@+id/divider5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
-                tools:visibility="visible" />
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/llTheatre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/purple_200"
-                android:backgroundTint="#FFFFFF"
-                tools:visibility="visible">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/twTheaterName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center|center_vertical"
-                    android:text="Valitse teatteri: "
-                    tools:visibility="visible" />
+                    android:text="Valitse teatteri: " />
 
                 <Spinner
                     android:id="@+id/spinTheatres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
-                    tools:visibility="visible" />
+                    android:spinnerMode="dialog" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                tools:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/llMovieName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/etTitle"
@@ -84,84 +71,36 @@
                     android:ems="10"
                     android:gravity="center"
                     android:hint="Elokuvan nimi"
-                    android:inputType="text"
-                    tools:visibility="visible" />
+                    android:inputType="text" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                tools:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/llDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etDate"
+                    style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:hint="Päivämäärä pp.kk.vvvv"
+                    android:inputType="date" />
 
-                    <EditText
-                        android:id="@+id/editTextNumber5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="2"
-                        android:gravity="center"
-                        android:hint="pp"
-                        android:inputType="number" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="." />
-
-                    <EditText
-                        android:id="@+id/editTextNumber6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="2"
-                        android:gravity="center"
-                        android:hint="kk"
-                        android:inputType="number" />
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="." />
-
-                    <EditText
-                        android:id="@+id/editTextNumber7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="4"
-                        android:gravity="center"
-                        android:hint="vvvv"
-                        android:inputType="number" />
-
-                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                tools:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/llMovieStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -188,39 +127,16 @@
                             android:gravity="center|center_vertical"
                             android:text="Alkaa aikaisintaan" />
 
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/etTimeMin"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/editTextNumber"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:gravity="center"
-                                android:hint="hh"
-                                android:inputType="number" />
-
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text=":" />
-
-                            <EditText
-                                android:id="@+id/editTextNumber2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:gravity="center"
-                                android:hint="mm"
-                                android:inputType="number" />
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="5"
+                            android:gravity="center"
+                            android:hint="hh:mm"
+                            android:inputType="time"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
@@ -243,39 +159,16 @@
                             android:gravity="center"
                             android:text="Alkaa viimeistään" />
 
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/etTimeMax"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/editTextNumber3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:gravity="center"
-                                android:hint="hh"
-                                android:inputType="number" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text=":" />
-
-                            <EditText
-                                android:id="@+id/editTextNumber4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ems="2"
-                                android:gravity="center"
-                                android:hint="mm"
-                                android:inputType="number" />
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="5"
+                            android:gravity="center"
+                            android:hint="hh:mm"
+                            android:inputType="time"
+                            android:singleLine="true" />
 
                     </LinearLayout>
 
