@@ -16,6 +16,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class ReadXML {
+    static ArrayList<Theatre> alTheatres = new ArrayList<Theatre>();
+
     /* Takes a date string as input,
      * converts it to LocalDateTime object,
      * and returns it.
@@ -53,7 +55,6 @@ public class ReadXML {
      * and returns the list.
      * */
     public static ArrayList<Theatre> getTheatres() {
-        ArrayList<Theatre> arrTheatres = new ArrayList<Theatre>();
         NodeList nodeList = getNodesByTagName(
                 "https://www.finnkino.fi/xml/TheatreAreas",
                 "TheatreArea");
@@ -69,10 +70,18 @@ public class ReadXML {
                 // Get theatre/area name from XML and store it inside the theatre object.
                 theatre.setName(theatreElement.getElementsByTagName("Name").item(0).getTextContent());
 
-                arrTheatres.add(theatre);
+                alTheatres.add(theatre);
             }
         }
-        return arrTheatres;
+        return alTheatres;
+    }
+
+    public static String[] getTheaterNames() {
+        ArrayList<String> alNames = new ArrayList<>();
+        for (Theatre t : alTheatres) {
+            alNames.add(t.getName());
+        }
+        return (String[]) alNames.toArray();
     }
 
     /* Finds Shows from the XML file,
@@ -91,7 +100,7 @@ public class ReadXML {
             Node node = nodeList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element showElement = (Element) node;
-                Show show = new Show();
+                ListedShow show = new ListedShow();
 
                 String sTitle = showElement.getElementsByTagName("Title").item(0).getTextContent();
                 LocalDateTime ldtStartDateTime = parseDateTime(showElement.getElementsByTagName("dttmShowStart").item(0).getTextContent());

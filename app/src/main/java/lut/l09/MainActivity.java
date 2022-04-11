@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etTimeMax = null;
 
     // Initialize arrays for information storage.
-    ArrayList<Theatre> arrTheatres = null;
+    ArrayList<Theatre> alTheatres = null;
     ArrayList<Show> arrShows = null;
 
     @Override
@@ -42,7 +43,15 @@ public class MainActivity extends AppCompatActivity {
         etTimeMin = findViewById(R.id.etTimeMin);
         etTimeMax = findViewById(R.id.etTimeMax);
 
-        arrTheatres = ReadXML.getTheatres();
+        alTheatres = ReadXML.getTheatres();
+
+        ArrayAdapter theatresAdapter = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                ReadXML.getTheaterNames()
+        );
+        theatresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinTheatres.setAdapter(theatresAdapter);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
