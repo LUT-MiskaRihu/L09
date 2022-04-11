@@ -81,7 +81,7 @@ public class ReadXML {
         for (Theatre t : alTheatres) {
             alNames.add(t.getName());
         }
-        return (String[]) alNames.toArray();
+        return alNames.toArray(new String[alTheatres.size()]);
     }
 
     /* Finds Shows from the XML file,
