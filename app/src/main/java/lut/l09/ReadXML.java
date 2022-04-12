@@ -1,6 +1,9 @@
 package lut.l09;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -8,27 +11,33 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class ReadXML {
-    static ArrayList<Theatre> alTheatres = new ArrayList<Theatre>();
+    @SuppressLint("SimpleDateFormat")
+    public static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
+    static ArrayList<Theatre> alTheatres = new ArrayList<Theatre>();
     /* Takes a date string as input,
-     * converts it to LocalDateTime object,
+     * converts it to Calendar object,
      * and returns it.
      * */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private static LocalDateTime parseDateTime(String sDateTime) {
-        final String sFormat = "yyyy-MM-dd'T'HH:mm:ss"; // DateTime format
-        return(LocalDateTime.parse(
-                sDateTime,
-                DateTimeFormatter.ofPattern(sFormat)
-        ));
+    @NonNull
+    private static Calendar parseDateTime(String dateTimeString) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(dateTimeFormatter.parse(dateTimeString));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
     }
 
     /* Takes XML URL and XML tag name as input,
@@ -76,6 +85,7 @@ public class ReadXML {
         return alTheatres;
     }
 
+    @NonNull
     public static String[] getTheaterNames() {
         ArrayList<String> alNames = new ArrayList<>();
         for (Theatre t : alTheatres) {
@@ -89,7 +99,7 @@ public class ReadXML {
      * adds them to an ArrayList,
      * and returns the list.
      * */
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @NonNull
     public static ArrayList<Show> getShows() {
         ArrayList<Show> arrShows = new ArrayList<Show>();
         NodeList nodeList = getNodesByTagName(
@@ -102,15 +112,15 @@ public class ReadXML {
                 Element showElement = (Element) node;
                 ListedShow show = new ListedShow();
 
-                String sTitle = showElement.getElementsByTagName("Title").item(0).getTextContent();
-                LocalDateTime ldtStartDateTime = parseDateTime(showElement.getElementsByTagName("dttmShowStart").item(0).getTextContent());
-                LocalDateTime ldtEndDateTime = parseDateTime(showElement.getElementsByTagName("dttmShowEnd").item(0).getTextContent());
-                int iLocation = Integer.parseInt(showElement.getElementsByTagName("TheatreID").item(0).getTextContent());
+                String title = showElement.getElementsByTagName("Title").item(0).getTextContent();
+                Calendar startDateTime = parseDateTime(showElement.getElementsByTagName("dttmShowStart").item(0).getTextContent());
+                Calendar endDateTime = parseDateTime(showElement.getElementsByTagName("dttmShowEnd").item(0).getTextContent());
+                int locationID = Integer.parseInt(showElement.getElementsByTagName("TheatreID").item(0).getTextContent());
 
-                show.setTitle(sTitle);
-                show.setStartDateTime(ldtStartDateTime);
-                show.setEndDateTime(ldtEndDateTime);
-                show.setLocation(iLocation);
+                show.setTitle(title);
+                show.setStartDateTime(startDateTime);
+                show.setEndDateTime(endDateTime);
+                show.setLocationID(locationID);
 
                 System.out.println(show.toString());
             }

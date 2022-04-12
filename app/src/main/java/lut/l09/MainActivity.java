@@ -3,6 +3,7 @@ package lut.l09;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,11 +11,16 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +30,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etDate = null;
     EditText etTimeMin = null;
     EditText etTimeMax = null;
-
-    // Initialize arrays for information storage.
-    ArrayList<Theatre> alTheatres = null;
-    ArrayList<Show> arrShows = null;
+    ListView lvResults = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,24 +45,57 @@ public class MainActivity extends AppCompatActivity {
         etDate = findViewById(R.id.etDate);
         etTimeMin = findViewById(R.id.etTimeMin);
         etTimeMax = findViewById(R.id.etTimeMax);
+        lvResults = findViewById(R.id.lvResults);
 
-        alTheatres = ReadXML.getTheatres();
+        SavedData.arrTheatres = ReadXML.getTheatres();
 
-        ArrayAdapter theatresAdapter = new ArrayAdapter(
+        ArrayAdapter theatreAdapter = new ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_item,
                 ReadXML.getTheaterNames()
         );
-        theatresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinTheatres.setAdapter(theatresAdapter);
+        theatreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinTheatres.setAdapter(theatreAdapter);
+
+        ArrayAdapter showAdapter = new ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                ReadXML.getShows().toArray()
+        );
+        lvResults.setAdapter(showAdapter);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    //@RequiresApi(api = Build.VERSION_CODES.O)
     public void search(View view) {
-        arrShows = ReadXML.getShows();
+        SavedData.arrShows = ReadXML.getShows();
+
+        /*
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm", Locale.ENGLISH);
         String sDate = etDate.getText().toString();
         String sTimeMin = etTimeMin.getText().toString();
         String sTimeMax = etTimeMax.getText().toString();
+
+        try {
+            Date dateStartDateTimeMin = formatter.parse(sDate + "-" + sTimeMin);
+            //Date dateStartDateTimeMax = formatter.parse(sDate + "-" + sTimeMax);
+
+            @SuppressLint("DefaultLocale") String sDate2 = String.format(
+                    "%02d.%02d.%04d",
+                    dateStartDateTimeMin.getDay(),
+                    dateStartDateTimeMin.getMonth(),
+                    dateStartDateTimeMin.getYear()
+            );
+
+            System.out.println(sDate2);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date dateStartDateTimeMax = null;
+
+
+
+        /*
         LocalDateTime ldtStartDateTimeMin = null;
         LocalDateTime ldtStartDateTimeMax = null;
 
@@ -68,5 +104,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
     }
 }

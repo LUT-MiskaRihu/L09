@@ -3,59 +3,78 @@ package lut.l09;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
-import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class ListedShow extends Show {
-    private LocalDateTime ldtStartDateTime;
-    private LocalDateTime ldtEndDateTime;
-    private int iLocationID;
+    private Calendar startDateTime;
+    private Calendar endDateTime;
+    private int locationID;
 
     public ListedShow() {
-        this.sTitle = null;
-        this.ldtStartDateTime = null;
-        this.ldtEndDateTime = null;
-        this.iLocationID = 0;
+        this.title = null;
+        this.startDateTime = null;
+        this.endDateTime = null;
+        this.locationID = 0;
     }
 
-    public LocalDateTime getShowStartDateTime() {
-        return ldtStartDateTime;
+    public Calendar getStartTimeMin() {
+        return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime ldtShowStart) {
-        this.ldtStartDateTime = ldtShowStart;
+    public void setStartDateTime(Calendar startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public LocalDateTime getShowEndDateTime() {
-        return ldtEndDateTime;
+    public Calendar getStartTimeMax() {
+        return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime ldtEndDateTime) {
-        this.ldtEndDateTime = ldtEndDateTime;
+    public void setEndDateTime(Calendar endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
-    public int getLocation() {
-        return iLocationID;
+    public int getLocationID() {
+        return locationID;
     }
 
-    public void setLocation(int iLocationID) {
-        this.iLocationID = iLocationID;
+    public void setLocationID(int locationID) {
+        this.locationID = locationID;
     }
 
     @SuppressLint("DefaultLocale")
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public String toString() {
+        String show;
 
-        String sDate = ldtStartDateTime.format(DateTimeFormatter.ofPattern("%02d.%02d.%04d"));
-        String sStartTime = ldtStartDateTime.format(DateTimeFormatter.ofPattern("02d:%02d"));
-        String sEndTime = ldtEndDateTime.format(DateTimeFormatter.ofPattern("02d:%02d"));
-        String sString = "";
-        sString = sString + "Title: %s\n\t";
-        sString = sString + "Date: %s\n\t";
-        sString = sString + "Start Time: %s\n\t";
-        sString = sString + "End Time: %02d:%02d\n\t";
-        sString = sString + "Location: %d\n";
-        sString = String.format(sString, sTitle, sDate, sStartTime, sEndTime, iLocationID);
-        return sString;
+        show =    "Title:      %s\n"
+                + "Date:       %02d.%02d.%04d\n"
+                + "Start Time: %02d:%02d\n"
+                + "End Time:   %02d:%02d\n"
+                + "Location:   %d\n\n";
+
+        show = String.format(
+                show,
+
+                this.title,
+
+                // Date
+                startDateTime.get(Calendar.DAY_OF_MONTH),
+                startDateTime.get(Calendar.MONTH) + 1,
+                startDateTime.get(Calendar.YEAR),
+
+                // Start time
+                startDateTime.get(Calendar.HOUR),
+                startDateTime.get(Calendar.MINUTE),
+
+                // End time
+                endDateTime.get(Calendar.HOUR),
+                endDateTime.get(Calendar.MINUTE),
+
+                // Location ID
+                locationID
+        );
+
+        return show;
     }
 }

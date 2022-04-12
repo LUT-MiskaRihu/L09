@@ -3,14 +3,14 @@ package lut.l09;
 public abstract class Show {
 
     // Common attribute(s)
-    protected String sTitle;
+    protected String title;
 
     // Common methods
     public String getTitle() {
-        return sTitle;
+        return title;
     }
 
-    public void setTitle(String sTitle) {
-        this.sTitle = sTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
