@@ -88,10 +88,19 @@ public class ReadXML {
     @NonNull
     public static String[] getTheaterNames() {
         ArrayList<String> alNames = new ArrayList<>();
-        for (Theatre t : alTheatres) {
+        for (Theatre t : getTheatres()) {
             alNames.add(t.getName());
         }
         return alNames.toArray(new String[alTheatres.size()]);
+    }
+
+    @NonNull
+    public static String[] getShowsAsString() {
+        ArrayList<String> alShows = new ArrayList<>();
+        for (ListedShow ls : getShows()) {
+            alShows.add(ls.toString());
+        }
+        return alShows.toArray(new String[alShows.size()]);
     }
 
     /* Finds Shows from the XML file,
@@ -100,8 +109,8 @@ public class ReadXML {
      * and returns the list.
      * */
     @NonNull
-    public static ArrayList<Show> getShows() {
-        ArrayList<Show> arrShows = new ArrayList<Show>();
+    public static ArrayList<ListedShow> getShows() {
+        ArrayList<ListedShow> arrShows = new ArrayList<>();
         NodeList nodeList = getNodesByTagName(
                 "https://www.finnkino.fi/xml/Schedule",
                 "Show");

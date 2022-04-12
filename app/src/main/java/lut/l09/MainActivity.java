@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText etTimeMin = null;
     EditText etTimeMax = null;
     ListView lvResults = null;
+
+    ArrayList<ListedShow> arrShows = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +59,37 @@ public class MainActivity extends AppCompatActivity {
         );
         theatreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinTheatres.setAdapter(theatreAdapter);
-
-        ArrayAdapter showAdapter = new ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                ReadXML.getShows().toArray()
-        );
-        lvResults.setAdapter(showAdapter);
     }
 
     //@RequiresApi(api = Build.VERSION_CODES.O)
     public void search(View view) {
+        System.out.println("########## Search started. ##########");
         SavedData.arrShows = ReadXML.getShows();
+
+        Filter filter = new Filter();
+
+        for (Theatre t : SavedData.arrTheatres) {
+            if (t.getName() == spinTheatres.getSelectedItem().toString()) {
+                filter.locationID = t.getID();
+                System.out.println("Selected location: " + filter.locationID);
+                break;
+            }
+        }
+
+        for (ListedShow ls : SavedData.arrShows) {
+            if (ls.getLocationID() == filter.locationID) {
+
+            }
+        }
+
+        System.out.println("########## Search ended. ##########");
+
+        ArrayAdapter showAdapter = new ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_2,
+                ReadXML.getShowsAsString()
+        );
+        lvResults.setAdapter(showAdapter);
 
         /*
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm", Locale.ENGLISH);

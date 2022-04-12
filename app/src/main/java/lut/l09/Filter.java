@@ -6,9 +6,11 @@ public class Filter {
     Calendar startDateTimeMin;
     Calendar startDateTimeMax;
     String title;
-    int location;
+    int locationID;
 
     public Filter() {
 
     }
+
+
 }
